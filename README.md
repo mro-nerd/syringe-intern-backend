@@ -204,17 +204,6 @@ Webhooks are protected using a cryptographic signature verified inside [verifyQS
 
 ---
 
-## 🐛 Troubleshooting
-
-#### 1. "Signature Verification Failed" or 401 on webhook callback
-*   **Check ngrok:** If you restart ngrok, a new random public URL is generated. Make sure your `.env`'s `WEBHOOK_BASE_URL` exactly matches the active ngrok URL.
-*   **Keys Check:** Double check that your `QSTASH_CURRENT_SIGNING_KEY` and `QSTASH_NEXT_SIGNING_KEY` do not have extra trailing/leading whitespaces in `.env`.
-
-#### 2. Connection errors with MongoDB
-*   Ensure that your Atlas network profile is whitelisted for the IP of the machine hosting the backend server. Choose `0.0.0.0/0` if your IP address changes frequently.
-
----
-
 ## 📄 License
 
 Distributed under the ISC License. See `package.json` for details.
