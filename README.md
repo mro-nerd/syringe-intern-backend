@@ -8,21 +8,7 @@
 
 The backend operates as an event-driven task processing system. It coordinates with MongoDB Atlas for persistent storage, and uses Upstash QStash as an external message broker to decouple HTTP requests from resource-heavy processing.
 
-```
-┌─────────────┐        ┌──────────────┐        ┌─────────────┐
-│   React     │ POST   │   Express    │ Publish │   Upstash   │
-│  Frontend   │───────▶│   Backend    │────────▶│   QStash    │
-│  (Vite)     │        │              │         │  (Queue)    │
-└──────┬──────┘        └──────┬───────┘         └──────┬──────┘
-       │                      │                        │
-       │  GET (poll)          │  Read/Write             │  Webhook
-       │  /api/jobs/:id/status│                        │  POST /api/webhooks/qstash
-       │                      ▼                        │
-       │               ┌──────────────┐                │
-       └──────────────▶│   MongoDB    │◀───────────────┘
-                       │   Atlas      │   (via ngrok tunnel)
-                       └──────────────┘
-```
+![System Architecture Diagram](./architecture.png)
 
 ### Async Processing Flow:
 1.  **Job Creation:** The client issues a `POST /api/jobs` request containing a `taskType`.
